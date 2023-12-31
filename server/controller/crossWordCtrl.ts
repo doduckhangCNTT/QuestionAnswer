@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import CrossWords from "../models/CrossWord";
+import { Request, Response } from 'express';
+import CrossWords from '../models/CrossWord';
 
 const crossWordCtrl = {
   /**
@@ -33,7 +33,7 @@ const crossWordCtrl = {
         } else {
           res
             .status(400)
-            .json({ success: false, msg: "Câu hỏi không tồn tại" });
+            .json({ success: false, msg: 'Câu hỏi không tồn tại' });
         }
       }
     } catch (error: any) {
@@ -56,7 +56,7 @@ const crossWordCtrl = {
           // Lưu thông tin người dùng
           await new_question.save();
         }
-        res.json({ success: true, msg: "Tạo câu hỏi thành công" });
+        res.json({ success: true, msg: 'Tạo câu hỏi thành công' });
       }
     } catch (error: any) {
       res.status(500).json({ msg: error.message });
@@ -79,17 +79,17 @@ const crossWordCtrl = {
             {
               _id: req.params.id,
             },
-            req.body
+            req.body,
           );
           if (question) {
             res
               .status(200)
-              .json({ success: true, msg: "Cập nhật câu hỏi thành công" });
+              .json({ success: true, msg: 'Cập nhật câu hỏi thành công' });
           }
         } else {
           res
             .status(400)
-            .json({ success: false, msg: "Không tồn tại câu hỏi để cập nhật" });
+            .json({ success: false, msg: 'Không tồn tại câu hỏi để cập nhật' });
         }
       }
     } catch (error: any) {
@@ -112,12 +112,12 @@ const crossWordCtrl = {
         if (question) {
           return res
             .status(200)
-            .json({ success: true, msg: "Xóa câu hỏi thành công" });
+            .json({ success: true, msg: 'Xóa câu hỏi thành công' });
         } else {
-          return res.status(400).json({ msg: "Câu hỏi không được tìm thấy." });
+          return res.status(400).json({ msg: 'Câu hỏi không được tìm thấy.' });
         }
       }
-      res.status(400).json({ msg: "Cung cấp thông tin để xóa câu hỏi" });
+      res.status(400).json({ msg: 'Cung cấp thông tin để xóa câu hỏi' });
     } catch (error: any) {
       res.status(500).json({ msg: error.message });
     }
