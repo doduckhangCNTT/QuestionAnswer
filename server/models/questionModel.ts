@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
-import { IQuestion } from "../config/interface";
 
 const questionSchema = new mongoose.Schema(
   {
+    /**Bộ đề của câu hỏi trong chủ đề tương ứng */
+    questionSet: { type: mongoose.Types.ObjectId, ref: "topicSets" },
+
     // Câu hỏi lựa chọn
     question: {
       type: String,
@@ -34,10 +36,10 @@ const questionSchema = new mongoose.Schema(
     /**Chủ đề của câu hỏi (Truy tìm cổ vật, Giải mã kho báu) */
     topicSetQuestion: Number,
 
-    /**Kiểu câu trả lời */
+    /**Kiểu câu trả lời (Trắc nghiệm || Tự luận) */
     typeAnswer: Number,
   },
   { timestamps: true }
 );
 
-export default mongoose.model<IQuestion>("questions", questionSchema);
+export default mongoose.model("questions", questionSchema);

@@ -12,6 +12,31 @@ const questionCtrl = {
       const questions = await Questions.find();
       if (questions && questions.length > 0) {
         res.json(questions);
+      } else {
+        res.json([]);
+      }
+    } catch (error: any) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  /**
+   * Lấy các questions theo chủ đề và bộ đề hiện tại
+   * @param req
+   * @param res
+   */
+  getQuestionsByTopicSet: async (req: Request, res: Response) => {
+    try {
+      if (req && req.params) {
+        const questions = await Questions.find({
+          topicSetQuestion: req.params.topicSet,
+          questionSet: req.params.questionSet,
+        }).populate("questionSet");
+        if (questions && questions.length > 0) {
+          res.json(questions);
+        } else {
+          res.json([]);
+        }
       }
     } catch (error: any) {
       res.status(500).json({ msg: error.message });
@@ -46,12 +71,13 @@ const questionCtrl = {
    * @param res
    */
   createQuestion: async (req: Request, res: Response) => {
-    console.log(req.body);
     try {
       if (req && req.body) {
+        console.log("NewQuestion: ", req.body);
         const questions = req.body;
         for (var i = 0; i < questions.length; i++) {
           const new_question = new Questions(questions[i]);
+          console.log("NewQuestion: ", new_question);
           // Lưu thông tin người dùng
           await new_question.save();
         }
@@ -103,7 +129,6 @@ const questionCtrl = {
    */
   deleteQuestion: async (req: Request, res: Response) => {
     try {
-      console.log(req.body);
       if (req && req.body) {
         const question = await Questions.findOneAndDelete({
           _id: req.params.id,

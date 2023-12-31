@@ -8,6 +8,11 @@ router.get("/questions", questionCtrl.getQuestions);
 
 router.get("/question/:id", questionCtrl.getQuestion);
 
+router.get(
+  "/questions/:topicSet/:questionSet",
+  questionCtrl.getQuestionsByTopicSet
+);
+
 router.post("/create/question", questionCtrl.createQuestion);
 
 router.patch("/update/question/:id", questionCtrl.updateQuestion);

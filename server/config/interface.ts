@@ -72,6 +72,9 @@ export interface IQuestion extends Document {
 
   /**Kiểu câu trả lời */
   typeAnswer: number;
+
+  /**Bộ đề câu hỏi */
+  questionSet: string;
 }
 
 export interface IResultQuestion extends Document {
