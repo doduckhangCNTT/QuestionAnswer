@@ -28,6 +28,9 @@ const questionSchema = new mongoose.Schema(
       type: Number,
     },
 
+    /**Link tài liệu của câu hỏi */
+    linkDoc: String,
+
     // Câu hỏi điền đáp án
     desc: String,
     /**Câu trả lời đối với kiểu câu hỏi nhập đáp án */
